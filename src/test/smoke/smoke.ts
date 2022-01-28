@@ -3,7 +3,7 @@ import axios, { AxiosResponse } from 'axios';
 
 jest.retryTimes(20); // 20 retries at 1 second intervals
 jest.setTimeout(15000);
-
+const testUrl = process.env.TEST_URL || 'https://localhost:8080'
 const servicesToCheck = [
   { name: 'Default Page Template', url: 'http://localhost:8080', heading: '<h1 class="govuk-heading-xl">Default page template</h1>', },
   //add more services here when created
