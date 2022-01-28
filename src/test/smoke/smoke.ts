@@ -3,17 +3,12 @@ import axios, { AxiosResponse } from 'axios';
 
 jest.retryTimes(20); // 20 retries at 1 second intervals
 jest.setTimeout(15000);
-const testUrl = process.env.TEST_URL || 'https://localhost:8080'
-const servicesToCheck = [
-  { name: 'Default Page Template', url: 'http://localhost:8080', heading: '<h1 class="govuk-heading-xl">Default page template</h1>', },
-  //add more services here when created
-];
+const testUrl = process.env.TEST_URL || 'http://localhost:8080'
 
 describe('Smoke Test', () => {
-  describe('Health Check', () => {
-    describe.each(servicesToCheck)('Required services should return 200 status UP', ({ name, url }) => {
-      const parsedUrl = new URL('/health', url as string).toString();
-      test(`${name}: ${url}`, async () => { // eslint-disable-line @typescript-eslint/no-empty-function
+    describe('Required services should return 200 status UP', () => {
+      const parsedUrl = new URL('/health', testUrl as string).toString();
+      test(`${testUrl}`, async () => { // eslint-disable-line @typescript-eslint/no-empty-function
         const checkService = async () => {
           try {
             const response: AxiosResponse = await axios.get(parsedUrl, {
@@ -27,7 +22,7 @@ describe('Smoke Test', () => {
             }
           } catch (e) {
             await new Promise((resolve, reject) =>
-              setTimeout(() => reject(`'${name}' endpoint is not up: '${parsedUrl}': ${e}`), 1000)
+              setTimeout(() => reject(`Endpoint is not up: '${parsedUrl}': ${e}`), 1000)
             );
           }
         };
@@ -37,8 +32,8 @@ describe('Smoke Test', () => {
   });
 
   describe('UI Test', () => {
-    describe.each(servicesToCheck)('Required services should have a heading present with the correct text displayed', ({ name, url, heading }) => {
-      test(`${name}`, async () => { // eslint-disable-line @typescript-eslint/no-empty-function
+    describe('Required services should have a heading present with the correct text displayed', () => {
+      test(`${testUrl}`, async () => { // eslint-disable-line @typescript-eslint/no-empty-function
         try {
           const response: AxiosResponse = await axios.get(testUrl, {
             headers: {
@@ -46,9 +41,9 @@ describe('Smoke Test', () => {
               accept: 'application/json',
             },
           });
-          if (!response.data.includes(heading)) {
+          if (!response.data.includes('<h1 class="govuk-heading-xl">Default page template</h1>')) {
             console.log(response.data)
-            throw new Error(` Heading ${heading} not present and/or correct`)
+            throw new Error(` Heading not present and/or correct`)
           }
         } catch (e) {
           fail(e);
@@ -56,4 +51,3 @@ describe('Smoke Test', () => {
       });
     });
   });
-});
