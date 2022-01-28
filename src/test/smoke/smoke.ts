@@ -40,7 +40,7 @@ describe('Smoke Test', () => {
     describe.each(servicesToCheck)('Required services should have a heading present with the correct text displayed', ({ name, url, heading }) => {
       test(`${name}`, async () => { // eslint-disable-line @typescript-eslint/no-empty-function
         try {
-          const response: AxiosResponse = await axios.get(url, {
+          const response: AxiosResponse = await axios.get(testUrl, {
             headers: {
               'Accept-Encoding': 'gzip',
               accept: 'application/json',
