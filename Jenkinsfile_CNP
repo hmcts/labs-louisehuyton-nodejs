@@ -13,4 +13,8 @@ withPipeline(type, product, component) {
     yarnBuilder.yarn('build')
   }
 
+  after() {
+    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'functional-output/functional/reports/**/*'
+  }
+
 }
