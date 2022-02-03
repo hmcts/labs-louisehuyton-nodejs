@@ -1,6 +1,6 @@
 module.exports = {
     roots: ['<rootDir>/src/test/smoke'],
-    output: 'src/test/smoke-output',
+    coverageDirectory: '<rootDir>/smoke-output/smoke/reports',
     testRegex: '(/src/test/.*|\\.test)\\.(ts|js)$',
     testEnvironment: 'node',
     testRunner: 'jest-circus/runner',
