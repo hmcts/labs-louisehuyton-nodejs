@@ -1,6 +1,6 @@
 module.exports = {
     roots: ['<rootDir>/src/test/smoke'],
-    output: process.cwd() + '/smoke-output',
+    outputPath: './smoke-output/smoke/reports',
     testRegex: '(/src/test/.*|\\.test)\\.(ts|js)$',
     testEnvironment: 'node',
     testRunner: 'jest-circus/runner',
