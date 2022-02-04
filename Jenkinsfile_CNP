@@ -13,4 +13,13 @@ withPipeline(type, product, component) {
     yarnBuilder.yarn('build')
   }
 
+  after('Smoke Test - AKS sandbox') {
+    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'smoke-output/**/*'
+  }
+
+  after('Functional Test - AKS sandbox') {
+    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'functional-output/***/**/*'
+    steps.junit allowEmptyResults: true, testResults: './functional-output/***/**/*-testsuite.xml'
+  }
+
 }
