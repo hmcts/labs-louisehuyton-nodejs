@@ -6,6 +6,6 @@ home: https://github.com/hmcts/labs-louisehuyton-nodejs
 version: 0.0.4
 dependencies:
   - name: nodejs
-    version: 2.3.9
+    version: 2.4.3
     repository: 'https://hmctspublic.azurecr.io/helm/v1/repo/'
 
