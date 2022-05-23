@@ -71,7 +71,7 @@
     "chai": "^4.3.4",
     "chai-as-promised": "^7.1.1",
     "codeceptjs": "^3.2.3",
-    "copy-webpack-plugin": "^10.2.0",
+    "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.5.1",
     "debug": "^4.3.3",
     "eslint": "^8.7.0",
