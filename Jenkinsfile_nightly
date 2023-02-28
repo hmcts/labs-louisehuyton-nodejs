@@ -12,7 +12,7 @@ def product = "labs"
 def component = "louisehuyton-nodejs"
 
 withNightlyPipeline(type, product, component) {
-  after('build') {
+  afterAlways {
     yarnBuilder.yarn('build')
   }
 }
