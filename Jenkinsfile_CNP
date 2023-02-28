@@ -1,0 +1,17 @@
+#!groovy
+
+@Library("Infrastructure")
+
+def type = "nodejs"
+def product = "labs"
+def component = "louisehuyton-nodejs"
+
+def yarnBuilder = new uk.gov.hmcts.contino.YarnBuilder(this)
+
+withPipeline(type, product, component) {
+  after('build') {
+    yarnBuilder.yarn('rebuild puppeteer')
+    yarnBuilder.yarn('build')
+  }
+
+}
