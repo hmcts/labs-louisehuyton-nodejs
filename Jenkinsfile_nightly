@@ -12,7 +12,6 @@ def product = "labs"
 def component = "louisehuyton-nodejs"
 
 withNightlyPipeline(type, product, component) {
-  enableSlackNotifications('#platops-build-notices')
   afterAlways('build') {
     yarnBuilder.yarn('build')
   }
