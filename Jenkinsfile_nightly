@@ -5,13 +5,16 @@ properties([
 pipelineTriggers([cron('H 05 * * *')])
 ])
 
-@Library("Infrastructure")
+@Library("Infrastructure@DTSPO-7198")
 
 def type = "nodejs"
 def product = "labs"
 def component = "louisehuyton-nodejs"
 
 withNightlyPipeline(type, product, component) {
+  
+  enableSecurityScan()
+  
   after('build') {
     yarnBuilder.yarn('build')
   }
