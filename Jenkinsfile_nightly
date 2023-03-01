@@ -15,6 +15,7 @@ def component = "louisehuyton-nodejs"
 
 withNightlyPipeline(type, product, component) {
   afterAlways('build') {
+    yarnBuilder.yarn('rebuild puppeteer')
     yarnBuilder.yarn('build')
   }
 }
