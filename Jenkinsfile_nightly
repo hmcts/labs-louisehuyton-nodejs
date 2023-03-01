@@ -5,6 +5,8 @@ properties([
 pipelineTriggers([cron('H 05 * * *')])
 ])
 
+def yarnBuilder = new uk.gov.hmcts.contino.YarnBuilder(this)
+
 @Library("Infrastructure")
 
 def type = "nodejs"
@@ -12,5 +14,7 @@ def product = "labs"
 def component = "louisehuyton-nodejs"
 
 withNightlyPipeline(type, product, component) {
-
+  afterAlways('build') {
+    yarnBuilder.yarn('build')
+  }
 }
